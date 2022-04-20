@@ -57,5 +57,9 @@
             </asp:TextBox>
         </div>
     </div>
-</div>
+     <asp:Button runat="server" ID="btnInserisci" Text="Inserisci" CssClass="btn btn-default" OnClick="btnInserisci_Click" />
+    </div>
+           
+       
+
 </asp:Content>

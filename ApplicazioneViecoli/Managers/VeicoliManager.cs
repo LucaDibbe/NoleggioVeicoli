@@ -17,7 +17,7 @@ namespace NoleggioVeicoli.Managers
         }
         public string ConnectionString { get; set; }
 
-        public bool InsertPersona(Models.VeicoliModel veicoliModel)
+        public bool InsertVeicolo(Models.VeicoliModel veicoliModel)
         {
             bool isInserito = false;
             var sb = new StringBuilder();

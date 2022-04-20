@@ -45,7 +45,7 @@ namespace ApplicazioneViecoli
         }
         private void PopolaAlimentazioneDDL()
         {
-            var pippo = "";
+           
             var veicoliManager = new VeicoliManager("Data Source=sqlserverprincipale.database.windows.net;Initial Catalog=Stage2022;User ID=utente;Password=Safo2022!");
             ddlAlimentazione.DataSource = veicoliManager.GetAlimentazione();
             ddlAlimentazione.DataTextField = "Alimentazione";
@@ -59,5 +59,56 @@ namespace ApplicazioneViecoli
         {
             txtData.Text = Immatricolazione.SelectedDate.ToString();
         }
+
+        protected void btnInserisci_Click(object sender, EventArgs e)
+        {
+
+            //if (txtNome.Text == "" || txtCognome.Text == "") {
+            //    //Visualizzo un messaggio di errore
+            //    return;
+            //}
+
+            //if (!IsFormValido())
+            //{
+            //    //Visualizzo un messaggio di errore
+            //    //infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Il form non è valido, nessun record inserito");
+            //    return;
+            //}
+            //var nome = txtNome.Text;
+
+            var veicoliModel = new VeicoliModel();
+
+            veicoliModel.Modello = txtModello.Text;
+            veicoliModel.Targa = txtTarga.Text;
+            veicoliModel.IdMarca = int.Parse(ddlTipoMarca.SelectedValue);
+            veicoliModel.IdAlimentazione = int.Parse(ddlAlimentazione.SelectedValue);
+
+
+            
+
+            var vaicoliManager = new VeicoliManager("Data Source=sqlserverprincipale.database.windows.net;Initial Catalog=Stage2022;User ID=utente;Password=Safo2022!");
+            bool isVeicoloInserito = vaicoliManager.InsertVeicolo(veicoliModel);
+        }
+
+        //private bool IsFormValido()
+        //{
+
+            
+        //    if (string.IsNullOrWhiteSpace(txtModello.Text))
+        //    {
+        //        return false;
+        //    }
+        //    if (string.IsNullOrWhiteSpace(txtTarga.Text))
+        //    {
+        //        return false;
+        //    }
+        //    if (!int.TryParse(ddlTipoMarca.SelectedValue, out int IdMarca) || IdMarca <= 0)
+        //    {
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
+
     }
 }
