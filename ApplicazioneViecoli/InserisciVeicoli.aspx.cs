@@ -45,6 +45,7 @@ namespace ApplicazioneViecoli
         }
         private void PopolaAlimentazioneDDL()
         {
+            var pippo = "";
             var veicoliManager = new VeicoliManager("Data Source=sqlserverprincipale.database.windows.net;Initial Catalog=Stage2022;User ID=utente;Password=Safo2022!");
             ddlAlimentazione.DataSource = veicoliManager.GetAlimentazione();
             ddlAlimentazione.DataTextField = "Alimentazione";
