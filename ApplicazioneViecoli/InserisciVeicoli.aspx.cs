@@ -13,6 +13,10 @@ namespace ApplicazioneViecoli
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                return;
+            }
 
 
 
@@ -82,33 +86,34 @@ namespace ApplicazioneViecoli
             veicoliModel.Targa = txtTarga.Text;
             veicoliModel.IdMarca = int.Parse(ddlTipoMarca.SelectedValue);
             veicoliModel.IdAlimentazione = int.Parse(ddlAlimentazione.SelectedValue);
+            veicoliModel.Immatricolazione = DateTime.Parse(txtData.Text);
 
 
-            
+
 
             var vaicoliManager = new VeicoliManager("Data Source=sqlserverprincipale.database.windows.net;Initial Catalog=Stage2022;User ID=utente;Password=Safo2022!");
             bool isVeicoloInserito = vaicoliManager.InsertVeicolo(veicoliModel);
         }
 
-        //private bool IsFormValido()
-        //{
+        private bool IsFormValido()
+        {
 
-            
-        //    if (string.IsNullOrWhiteSpace(txtModello.Text))
-        //    {
-        //        return false;
-        //    }
-        //    if (string.IsNullOrWhiteSpace(txtTarga.Text))
-        //    {
-        //        return false;
-        //    }
-        //    if (!int.TryParse(ddlTipoMarca.SelectedValue, out int IdMarca) || IdMarca <= 0)
-        //    {
-        //        return false;
-        //    }
 
-        //    return true;
-        //}
+            if (string.IsNullOrWhiteSpace(txtModello.Text))
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtTarga.Text))
+            {
+                return false;
+            }
+            if (!int.TryParse(ddlTipoMarca.SelectedValue, out int IdMarca) || IdMarca <= 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
     }
 }

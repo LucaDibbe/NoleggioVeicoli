@@ -7,7 +7,7 @@ namespace NoleggioVeicoli.Models
 {
     public class VeicoliModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int? IdMarca { get; set; }
         public string Modello { get; set; }
         public string Targa { get; set; }
