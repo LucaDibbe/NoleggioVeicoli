@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InserisciVeicoli.aspx.cs" Inherits="ApplicazioneViecoli.InserisciVeicoli" %>
+<%@ Register Src="~/Controls/InfoControl.ascx" TagPrefix="uc1" TagName="InfoControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+         <uc1:InfoControl runat="server" id="infoControl" />
 
 
 
@@ -45,21 +48,25 @@
         </div>
 
 
-
-
         <div class="form-group">
 
             <asp:Calendar runat="server" ID="Immatricolazione" OnSelectionChanged="Immatricolazione_SelectionChanged"></asp:Calendar>
         </div>
         <div class="form-group">
-            <label for="txtNoleggiato">Noleggiato</label>
-            <asp:TextBox runat="server" ID="txtNoleggiato" CssClass="form-control">
+            <label for="txtNote">Note</label>
+            <asp:TextBox runat="server" ID="txtNote" CssClass="form-control">
             </asp:TextBox>
         </div>
     </div>
      <asp:Button runat="server" ID="btnInserisci" Text="Inserisci" CssClass="btn btn-default" OnClick="btnInserisci_Click" />
     </div>
            
-       
+    <style>        body {
+            background-color : blue 
+                   }
+        footer{
+            color : white
+        }
+    </style>   
 
 </asp:Content>

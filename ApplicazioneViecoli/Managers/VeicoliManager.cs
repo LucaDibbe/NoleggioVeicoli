@@ -1,7 +1,5 @@
-﻿using NoleggioVeicoli.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -17,7 +15,7 @@ namespace NoleggioVeicoli.Managers
         }
         public string ConnectionString { get; set; }
 
-        public bool InsertVeicolo(Models.VeicoliModel veicoliModel)
+        public bool InsertPersona(Models.VeicoliModel veicoliModel)
         {
             bool isInserito = false;
             var sb = new StringBuilder();
@@ -123,93 +121,6 @@ namespace NoleggioVeicoli.Managers
                 }
             }
             return isInserito;
-        }
-
-        public List<MarcaModel> GetMarca()
-        {
-            var TipoMarcaList = new List<MarcaModel>();
-            var sb = new StringBuilder();
-            sb.AppendLine("SELECT");
-            sb.AppendLine("\t[Id]");
-            sb.AppendLine("\t,[Marca]");
-            sb.AppendLine("FROM [dbo].[LDB_Marca]");
-
-            var dataSet = new DataSet();
-            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
-            {
-                sqlConnection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
-                {
-                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                    {
-                        sqlDataAdapter.SelectCommand = sqlCommand;
-                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
-                        sqlDataAdapter.Fill(dataSet);
-
-                        var dataTable = dataSet.Tables[0];
-
-
-                        if (dataTable == null || dataTable.Rows.Count <= 0)
-                        {
-                            return new List<MarcaModel>();
-                        }
-
-                        foreach (DataRow dataRow in dataTable.Rows)
-                        {
-                            var TipoMarca = new MarcaModel();
-                            //personaModel.Id = Convert.ToInt32(dataRow["Id"]);
-                            TipoMarca.Id = dataRow.Field<int>("id");
-                            TipoMarca.Marca = dataRow.Field<string>("Marca");
-                            TipoMarcaList.Add(TipoMarca);
-                        }
-                    }
-                }
-            }
-            return TipoMarcaList;
-        }
-
-
-        public List<AlimentazioneModel> GetAlimentazione()
-        {
-            var TipoAlimentazioneList = new List<AlimentazioneModel>();
-            var sb = new StringBuilder();
-            sb.AppendLine("SELECT");
-            sb.AppendLine("\t[Id]");
-            sb.AppendLine("\t,[Alimentazione]");
-            sb.AppendLine("FROM [dbo].[LDB_Alimentazione]");
-
-            var dataSet = new DataSet();
-            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
-            {
-                sqlConnection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
-                {
-                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                    {
-                        sqlDataAdapter.SelectCommand = sqlCommand;
-                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
-                        sqlDataAdapter.Fill(dataSet);
-
-                        var dataTable = dataSet.Tables[0];
-
-
-                        if (dataTable == null || dataTable.Rows.Count <= 0)
-                        {
-                            return new List<AlimentazioneModel>();
-                        }
-
-                        foreach (DataRow dataRow in dataTable.Rows)
-                        {
-                            var TipoAlimentazione = new AlimentazioneModel();
-                            //personaModel.Id = Convert.ToInt32(dataRow["Id"]);
-                            TipoAlimentazione.Id = dataRow.Field<int>("Id");
-                            TipoAlimentazione.Alimentazione = dataRow.Field<string>("Alimentazione");
-                            TipoAlimentazioneList.Add(TipoAlimentazione);
-                        }
-                    }
-                }
-            }
-            return TipoAlimentazioneList;
         }
 
     }

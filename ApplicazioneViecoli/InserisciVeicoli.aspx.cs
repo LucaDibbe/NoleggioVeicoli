@@ -23,19 +23,7 @@ namespace ApplicazioneViecoli
             PopolaMarcaDDL();
             PopolaAlimentazioneDDL();
 
-
-
-            //    List<ComuneModel> comuni = Singleton.Instance.ListaComuni;
-            //    ddComuneNascita.DataSource = comuni;
-            //    ddComuneNascita.DataTextField = "Comune";
-            //    ddComuneNascita.DataValueField = "Id";
-            //    ddComuneNascita.DataBind();
-            //    ddComuneNascita.Items.Insert(0, new ListItem("seleziona", "-1"));
-
-
-            //var veicoloModel = new VeicoliModel();
-            //veicoloModel.
-            //veicoliManager.InsertPersona();
+            
         }
         private void PopolaMarcaDDL()
         {
@@ -61,24 +49,13 @@ namespace ApplicazioneViecoli
 
         protected void Immatricolazione_SelectionChanged(object sender, EventArgs e)
         {
-            txtData.Text = Immatricolazione.SelectedDate.ToString();
+            txtData.Text = Immatricolazione.SelectedDate.ToShortDateString();
         }
 
         protected void btnInserisci_Click(object sender, EventArgs e)
         {
 
-            //if (txtNome.Text == "" || txtCognome.Text == "") {
-            //    //Visualizzo un messaggio di errore
-            //    return;
-            //}
-
-            //if (!IsFormValido())
-            //{
-            //    //Visualizzo un messaggio di errore
-            //    //infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Il form non è valido, nessun record inserito");
-            //    return;
-            //}
-            //var nome = txtNome.Text;
+            
 
             var veicoliModel = new VeicoliModel();
 
@@ -87,12 +64,15 @@ namespace ApplicazioneViecoli
             veicoliModel.IdMarca = int.Parse(ddlTipoMarca.SelectedValue);
             veicoliModel.IdAlimentazione = int.Parse(ddlAlimentazione.SelectedValue);
             veicoliModel.Immatricolazione = DateTime.Parse(txtData.Text);
+            veicoliModel.Note = txtNote.Text;
 
 
 
 
             var vaicoliManager = new VeicoliManager("Data Source=sqlserverprincipale.database.windows.net;Initial Catalog=Stage2022;User ID=utente;Password=Safo2022!");
             bool isVeicoloInserito = vaicoliManager.InsertVeicolo(veicoliModel);
+            infoControl.SetMessage(ApplicazioneViecoli.Controls.InfoControl.TipoMessaggio.Success, "Il veicolo è stato aggiunto");
+
         }
 
         private bool IsFormValido()
